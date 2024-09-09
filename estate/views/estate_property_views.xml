@@ -57,6 +57,15 @@
                                 <field name="garden_orientation" />
                             </group>
                         </page>
+                        <page name="estate_property_page_offers" string="Ofertas">
+                            <field name="offer_ids">
+                                <tree>
+                                    <field name="price" />
+                                    <field name="partner_id" />
+                                    <field name="state" />
+                                </tree>
+                            </field>
+                        </page>
                         <page name="estate_property_page_other_info" string="Más información">
                             <group>
                                 <field name="user_id" />
