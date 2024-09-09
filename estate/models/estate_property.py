@@ -9,6 +9,14 @@ GARDEN_ORIENTATION_OPTS = [
     ("west", "Oeste"),
 ]
 
+STATE_OPTS = [
+    ("new", "Nuevo"),
+    ("offer_received", "Oferta recibida"),
+    ("offer_accepted", "Oferta aceptada"),
+    ("sold", "Vendido"),
+    ("cancel", "Cancelado"),
+]
+
 
 class EstateProperty(models.Model):
     _name = "estate.property"
@@ -30,6 +38,8 @@ class EstateProperty(models.Model):
         string="Orientación del jardín",
         selection=GARDEN_ORIENTATION_OPTS
     )
+    active = fields.Boolean(string="Activo", default=True)
+    state = fields.Selection(string="Estado", selection=STATE_OPTS, required=True, copy=False, default='new')
 
     @api.model
     def _default_date_availability(self):
