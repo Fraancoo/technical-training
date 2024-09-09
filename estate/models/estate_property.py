@@ -59,7 +59,6 @@ class EstateProperty(models.Model):
         for record in self:
             if len(record.offer_ids):
                 best_price = max(record.offer_ids.mapped('price'))
-            if best_price:
-                record.best_price = best_price
             else:
-                record.best_price = 0
+                best_price = 0
+            record.best_price = best_price
