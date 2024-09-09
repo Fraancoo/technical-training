@@ -40,4 +40,5 @@ class EstateProperty(models.Model):
     active = fields.Boolean(string="Activo", default=True)
     state = fields.Selection(string="Estado", selection=STATE_OPTS, required=True, copy=False, default='new')
     property_type_id = fields.Many2one(string="Tipo", comodel_name="estae.property.type")
-    partner_id = fields.Many2one(string="Partner", comodel_name="res.partner")
+    partner_id = fields.Many2one(string="Comprador", comodel_name="res.partner", copy=False)
+    user_id = fields.Many2one(string="Vendedor", comodel_name="res.users", default=lambda self: self.env.user)
