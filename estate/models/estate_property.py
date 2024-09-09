@@ -1,4 +1,5 @@
-from odoo import models, fields
+from odoo import models, fields, api
+from datetime import timedelta
 
 
 GARDEN_ORIENTATION_OPTS = [
@@ -16,10 +17,10 @@ class EstateProperty(models.Model):
     name = fields.Char(string="Nombre", required=True)
     description = fields.Text(string="Descripción")
     postcode = fields.Char(string="Código postal")
-    date_availability = fields.Date(string="Disponibilidad")
+    date_availability = fields.Date(string="Disponibilidad", copy=True, default=lambda self: self._default_date_availability())
     expected_price = fields.Float(string="Precio deseado", required=True)
-    selling_price = fields.Float(string="Precio de venta")
-    bedrooms = fields.Integer(string="Cuartos")
+    selling_price = fields.Float(string="Precio de venta", readonly=True, copy=True)
+    bedrooms = fields.Integer(string="Cuartos", default=2)
     living_area = fields.Integer(string="Salas")
     facades = fields.Integer(string="Fachadas")
     garage = fields.Boolean(string="Parqueadero")
@@ -29,3 +30,7 @@ class EstateProperty(models.Model):
         string="Orientación del jardín",
         selection=GARDEN_ORIENTATION_OPTS
     )
+
+    @api.model
+    def _default_date_availability(self):
+        return fields.Date.today() + timedelta(days=90)
