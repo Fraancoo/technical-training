@@ -59,7 +59,7 @@ class EstateProperty(models.Model):
         for record in self:
             if len(record.offer_ids):
                 best_price = max(record.offer_ids.mapped('price'))
-                logger.warning("----------------------")
-                logger.warning(best_price)
-                logger.warning("----------------------")
-            record.best_price = 666
+            if best_price:
+                record.best_price = best_price
+            else:
+                record.best_price = 0
