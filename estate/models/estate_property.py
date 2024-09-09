@@ -28,7 +28,7 @@ class EstateProperty(models.Model):
     expected_price = fields.Float(string="Precio deseado", required=True)
     selling_price = fields.Float(string="Precio de venta", readonly=True, copy=True)
     bedrooms = fields.Integer(string="Cuartos", default=2)
-    living_area = fields.Integer(string="Salas")
+    living_area = fields.Integer(string="Area de la sala (m2)")
     facades = fields.Integer(string="Fachadas")
     garage = fields.Boolean(string="Parqueadero")
     garden = fields.Boolean(string="Jardín")
