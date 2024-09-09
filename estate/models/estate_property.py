@@ -1,4 +1,4 @@
-from odoo import models, fields
+from odoo import models, fields, api
 
 
 GARDEN_ORIENTATION_OPTS = [
@@ -44,3 +44,15 @@ class EstateProperty(models.Model):
     user_id = fields.Many2one(string="Vendedor", comodel_name="res.users", default=lambda self: self.env.user)
     tag_ids = fields.Many2many(string='Etiquetas', comodel_name='estate.property.tag')
     offer_ids = fields.One2many(string='Ofertas', comodel_name='estate.property.offer', inverse_name='property_id')
+    total_area = fields.Char(string='Área total (m2)', compute='_compute_total_area', readonly=True)
+    best_price = fields.Char(string='Mejor precio', compute='_compute_best_price', readonly=True)
+    
+    @api.depends('living_area', 'garden_area')
+    def _compute_total_area(self):
+        for record in self:
+            record.total_area = record.living_area + record.garden_area
+
+    @api.depends('offer_ids')
+    def _compute_best_price(self):
+        for record in self:
+            record.best_price = max(record.offer_ids.mapped('price'))
