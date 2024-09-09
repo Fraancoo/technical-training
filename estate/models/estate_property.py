@@ -1,4 +1,6 @@
 from odoo import models, fields, api
+import logging
+logger = logging.getLogger(__name__)
 
 
 GARDEN_ORIENTATION_OPTS = [
@@ -44,8 +46,8 @@ class EstateProperty(models.Model):
     user_id = fields.Many2one(string="Vendedor", comodel_name="res.users", default=lambda self: self.env.user)
     tag_ids = fields.Many2many(string='Etiquetas', comodel_name='estate.property.tag')
     offer_ids = fields.One2many(string='Ofertas', comodel_name='estate.property.offer', inverse_name='property_id')
-    total_area = fields.Char(string='Área total (m2)', compute='_compute_total_area', readonly=True)
-    best_price = fields.Char(string='Mejor precio', compute='_compute_best_price', readonly=True)
+    total_area = fields.Float(string='Área total (m2)', compute='_compute_total_area', readonly=True)
+    best_price = fields.Float(string='Mejor precio', compute='_compute_best_price', readonly=True)
     
     @api.depends('living_area', 'garden_area')
     def _compute_total_area(self):
@@ -57,5 +59,5 @@ class EstateProperty(models.Model):
         for record in self:
             if record.offer_ids:
                 best_price = max(record.offer_ids.mapped('price'))
-                print(best_price)
+                logger.warning(best_price)
                 record.best_price = 666
