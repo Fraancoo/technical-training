@@ -12,7 +12,7 @@
         <field name="arch" type="xml">
             <tree string="Propiedades"
              decoration-success="state in ('offer_received', 'offer_accepted')"
-             decoration-bf="state == 'offer_received'"
+             decoration-bf="state == 'offer_accepted'"
              decoration-muted="state == 'sold'">
                 <field name="name" />
                 <field name="postcode" />
