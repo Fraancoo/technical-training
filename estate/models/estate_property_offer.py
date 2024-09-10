@@ -11,6 +11,7 @@ STATE_OPTS = [
 class EstatePropertyOffer(models.Model):
     _name = 'estate.property.offer'
     _description = 'Ofertas de las propiedades'
+    _order = "price desc"
     
     price = fields.Float(string='Precio', required=True)
     state = fields.Selection(string='Estatus', selection=STATE_OPTS, copy=False)

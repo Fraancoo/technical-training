@@ -22,6 +22,7 @@ STATE_OPTS = [
 class EstateProperty(models.Model):
     _name = "estate.property"
     _description = "Modelo para ver las propiedades"
+    _order = "id desc"
 
     name = fields.Char(string="Nombre", required=True)
     description = fields.Text(string="Descripción")
