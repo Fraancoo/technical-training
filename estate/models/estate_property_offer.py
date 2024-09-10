@@ -16,7 +16,7 @@ class EstatePropertyOffer(models.Model):
     partner_id = fields.Many2one(string='Partner', comodel_name='res.partner', required=True)
     property_id = fields.Many2one(string='Propiedad', comodel_name='estate.property', required=True)
     validity = fields.Integer(string='Validación', required=True, default=7)
-    date_deadline = fields.Integer(string='Fecha límite', compute='_compute_date_deadline', inverse='_inverse_date_deadline')
+    date_deadline = fields.Date(string='Fecha límite', compute='_compute_date_deadline', inverse='_inverse_date_deadline')
 
     @api.depends('validity')
     def _compute_date_deadline(self):
