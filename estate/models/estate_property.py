@@ -71,14 +71,14 @@ class EstateProperty(models.Model):
             self.garden_area = 0
             self.garden_orientation = ""
 
-    def _action_cancel_property(self):
+    def action_cancel_property(self):
         for record in self:
             if record.state == "sold":
                 raise UserError('Las propiedades vendidas no pueden ser canceladas')
             record.state = "cancel"
         return True
 
-    def _action_sell_property(self):
+    def action_sell_property(self):
         for record in self:
             if record.state == "cancel":
                 raise UserError('Las propiedades canceladas no pueden ser vendidas')

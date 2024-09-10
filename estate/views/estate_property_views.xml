@@ -29,8 +29,8 @@
         <field name="arch" type="xml">
             <form string="Propiedad">
                 <header>
-                    <button name="_action_sell_property" type="object" string="Vender" icon="fa-check" class="btn-primary" />
-                    <button name="_action_cancel_property" type="object" string="Cancelar" icon="fa-times" />
+                    <button name="action_sell_property" type="object" string="Vender" icon="fa-check" class="btn-primary" />
+                    <button name="action_cancel_property" type="object" string="Cancelar" icon="fa-times" />
                 </header>
                 <sheet>
                     <div class="oe_title mb-3">
