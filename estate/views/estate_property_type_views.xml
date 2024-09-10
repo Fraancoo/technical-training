@@ -33,9 +33,11 @@
                     <notebook>
                         <page name="estate_property_type_page_properties" string="Propiedades">
                             <field name="property_ids">
-                                <field name="name" />
-                                <field name="expected_price" />
-                                <field name="status" />
+                                <tree>
+                                    <field name="name" />
+                                    <field name="expected_price" />
+                                    <field name="status" />
+                                </tree>
                             </field>
                         </page>
                     </notebook>
