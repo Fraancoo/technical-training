@@ -23,9 +23,9 @@
         <field name="model">estate.property.type</field>
         <field name="arch" type="xml">
             <form string="Tipo de propiedad">
-                <header>
+                <!-- <header>
                     <button string="Ofertas" name="%(estate.estate_property_offer_action)d" type="action" />
-                </header>
+                </header> -->
                 <sheet>
                     <div class="oe_title mb-3">
                         <h1>
