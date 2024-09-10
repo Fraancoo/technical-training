@@ -3,7 +3,7 @@
     <record id="estate_property_action" model="ir.actions.act_window">
         <field name="name">Propiedades</field>
         <field name="res_model">estate.property</field>
-        <field name="context">{'search_default_active': True}</field>
+        <field name="context">{'search_default_state': True}</field>
         <field name="view_mode">tree,form</field>
     </record>
 
