@@ -108,7 +108,9 @@
                 <field name="postcode" />
                 <field name="expected_price" />
                 <field name="bedrooms" />
-                <field name="living_area" />
+                <field name="living_area"
+                 string="Sala mayor o igual (m2)"
+                 filter_domain="[('living_area', '>=', self)]" />
                 <field name="facades" />
                 <separator />
                 <filter name="state" string="Disponibles" domain="[('state', 'in', ('new', 'offer_received'))]" />
