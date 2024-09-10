@@ -30,6 +30,15 @@
                             <field name="name" widget="text" options="{'line_breaks': False}" />
                         </h1>
                     </div>
+                    <notebook>
+                        <page name="estate_property_type_page_properties" string="Propiedades">
+                            <field name="property_ids">
+                                <field name="name" />
+                                <field name="expected_price" />
+                                <field name="status" />
+                            </field>
+                        </page>
+                    </notebook>
                 </sheet>
             </form>
         </field>
