@@ -1,4 +1,5 @@
 from odoo import models, fields, api
+from odoo.exceptions import UserError
 
 
 STATE_OPTS = [
@@ -27,3 +28,25 @@ class EstatePropertyOffer(models.Model):
         for record in self:
             resp_date = record.date_deadline - fields.Date.today()
             record.validity = resp_date.days
+
+    def action_refuse_offer(self):
+        for record in self:
+            if record.state == "accepted":
+                raise UserError('Las ofertas aceptadas no pueden ser rechazadas')
+            record.state = "refused"
+        return True
+
+    def action_accept_offer(self):
+        for record in self:
+            if record.state == "refused":
+                raise UserError('Las ofertas rechazadas no pueden ser aceptadas')
+            another_accepted_offer = self.env['estate.property.offer'].search([
+                ('state', '=', 'accepted'),
+                ('property_id', '=', record.property_id),
+            ], limit=1)
+            if another_accepted_offer:
+                raise UserError('Ya existe una oferta aceptada para esta propiedad')
+            record.state = "accepted"
+            record.property_id.partner_id = record.partner_id
+            record.selling_price = record.price
+        return True
