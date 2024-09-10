@@ -88,8 +88,11 @@ class EstateProperty(models.Model):
 
     @api.onchange('offer_ids')
     def _onchange_offer_ids(self):
-        if len(self.offer_ids) and self.state == 'new':
+        offers_exist = len(self.offer_ids)
+        if offers_exist and self.state == 'new':
             self.state = 'offer_received'
+        elif not offers_exist and (self.state == 'offer_received' or self.state == 'offer_accepted'):
+            self.state = 'new'
 
     def action_cancel_property(self):
         for record in self:
