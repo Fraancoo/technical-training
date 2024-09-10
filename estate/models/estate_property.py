@@ -1,5 +1,6 @@
 from odoo import models, fields, api
-from odoo.exceptions import UserError
+from odoo.exceptions import UserError, ValidationError
+from odoo.tools.float_utils import float_compare, float_is_zero
 
 
 GARDEN_ORIENTATION_OPTS = [
@@ -50,8 +51,17 @@ class EstateProperty(models.Model):
 
     _sql_constraints = [
         ("expected_price_check", "check(expected_price > 0)", "El precio deseado debe ser mayor a 0"),
-        ("selling_price_check", "check(selling_price > 0)", "El precio de venta debe ser mayor a 0"),
     ]
+
+    @api.constrains('expected_price', 'selling_price')
+    def _constrains_selling_price_check(self):
+        for record in self:
+            if record.state == 'sold':
+                if not float_is_zero(record.selling_price, precision_digits=1):
+                    raise ValidationError("El precio de venta es inválido")
+                expected_price_90 = record.expected_price / 100 * 90
+                if not float_compare(record.selling_price, expected_price_90, precision_digits=1):
+                    raise ValidationError("El precio de venta debe ser al menos el 90%% del precio deseado")
     
     @api.depends('living_area', 'garden_area')
     def _compute_total_area(self):
