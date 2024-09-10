@@ -60,19 +60,19 @@
                                 <field name="facades" />
                                 <field name="garage" />
                                 <field name="garden" />
-                                <field name="garden_area" />
-                                <field name="garden_orientation" />
+                                <field name="garden_area" invisible="not garden" />
+                                <field name="garden_orientation" invisible="not garden" />
                                 <field name="total_area" />
                             </group>
                         </page>
                         <page name="estate_property_page_offers" string="Ofertas">
-                            <field name="offer_ids">
+                            <field name="offer_ids" readonly="state in ('offer_accepted', 'sold', 'cancel')">
                                 <tree>
                                     <field name="price" />
                                     <field name="partner_id" />
                                     <field name="date_deadline" />
-                                    <button name="action_accept_offer" type="object" icon="fa-check" />
-                                    <button name="action_refuse_offer" type="object" icon="fa-times" />
+                                    <button name="action_accept_offer" type="object" icon="fa-check" invisible="state" />
+                                    <button name="action_refuse_offer" type="object" icon="fa-times" invisible="state" />
                                     <field name="state" />
                                 </tree>
                             </field>
