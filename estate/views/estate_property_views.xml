@@ -29,8 +29,8 @@
         <field name="arch" type="xml">
             <form string="Propiedad">
                 <header>
-                    <button name="action_sell_property" type="object" string="Vender" icon="fa-check" class="btn-primary" />
-                    <button name="action_cancel_property" type="object" string="Cancelar" icon="fa-times" />
+                    <button name="action_sell_property" type="object" string="Vender" icon="fa-check" class="btn-primary" invisible="state in ('sold', 'cancel')" />
+                    <button name="action_cancel_property" type="object" string="Cancelar" icon="fa-times" invisible="state in ('sold', 'cancel')" />
                     <field name="state" widget="statusbar" statusbar_visible="new,offer_received,offer_accepted,sold"/>
                 </header>
                 <sheet>
