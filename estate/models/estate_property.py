@@ -53,7 +53,7 @@ class EstateProperty(models.Model):
         ("expected_price_check", "check(expected_price > 0)", "El precio deseado debe ser mayor a 0"),
     ]
 
-    @api.constrains('expected_price', 'selling_price')
+    @api.constrains('expected_price', 'selling_price', 'state')
     def _constrains_selling_price_check(self):
         for record in self:
             if record.state == 'sold':
