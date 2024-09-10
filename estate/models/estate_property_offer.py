@@ -42,7 +42,7 @@ class EstatePropertyOffer(models.Model):
                 raise UserError('Las ofertas rechazadas no pueden ser aceptadas')
             another_accepted_offer = self.env['estate.property.offer'].search([
                 ('state', '=', 'accepted'),
-                ('property_id', '=', record.property_id),
+                ('property_id.id', '=', record.property_id.id),
             ], limit=1)
             if another_accepted_offer:
                 raise UserError('Ya existe una oferta aceptada para esta propiedad')
