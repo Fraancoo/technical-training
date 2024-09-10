@@ -31,6 +31,7 @@
                 <header>
                     <button name="action_sell_property" type="object" string="Vender" icon="fa-check" class="btn-primary" />
                     <button name="action_cancel_property" type="object" string="Cancelar" icon="fa-times" />
+                    <field name="state" widget="statusbar" statusbar_visible="new,offer_received,offer_accepted,sold"/>
                 </header>
                 <sheet>
                     <div class="oe_title mb-3">
@@ -41,7 +42,6 @@
                     </div>
                     <field name="tag_ids" widget="many2many_tags" />
                     <group>
-                        <field name="state" />
                         <field name="property_type_id" />
                         <field name="postcode" />
                         <field name="date_availability" />
