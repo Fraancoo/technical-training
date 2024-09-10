@@ -42,7 +42,7 @@
                     </div>
                     <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}" />
                     <group>
-                        <field name="property_type_id" options="{'can_create': false, 'can_write': false}" />
+                        <field name="property_type_id" options="{'no_create': true, 'can_write': false}" />
                         <field name="postcode" />
                         <field name="date_availability" />
                     </group>
