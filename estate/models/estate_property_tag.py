@@ -9,3 +9,7 @@ class EstatePropertyTag(models.Model):
     name = fields.Char(string="Nombre", required=True)
     active = fields.Boolean(string="Activo", default=True)
     sequence = fields.Integer(string="Orden", default=10)
+
+    _sql_constraints = [
+        ("name_unique", "unique(name)", "Ya existe una etiqueta con ese nombre"),
+    ]

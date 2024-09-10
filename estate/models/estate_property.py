@@ -47,6 +47,11 @@ class EstateProperty(models.Model):
     offer_ids = fields.One2many(string='Ofertas', comodel_name='estate.property.offer', inverse_name='property_id')
     total_area = fields.Float(string='Área total (m2)', compute='_compute_total_area', readonly=True)
     best_price = fields.Float(string='Mejor precio', compute='_compute_best_price', readonly=True)
+
+    _sql_constraints = [
+        ("expected_price_check", "check(expected_price > 0)", "El precio deseado debe ser mayor a 0"),
+        ("selling_price_check", "check(selling_price > 0)", "El precio de venta debe ser mayor a 0"),
+    ]
     
     @api.depends('living_area', 'garden_area')
     def _compute_total_area(self):
