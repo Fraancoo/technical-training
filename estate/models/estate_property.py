@@ -48,8 +48,8 @@ class EstateProperty(models.Model):
     offer_ids = fields.One2many(string='Ofertas', comodel_name='estate.property.offer', inverse_name='property_id')
     total_area = fields.Float(string='Área total (m2)', compute='_compute_total_area', readonly=True)
     best_price = fields.Float(string='Mejor precio', compute='_compute_best_price', readonly=True)
-    # validity = fields.Integer(string='Validación', required=True, default=7)
-    # date_deadline = fields.Integer(string='Fecha límite', compute='_compute_date_deadline', compute='_inverse_date_deadline')
+    validity = fields.Integer(string='Validación', required=True, default=7)
+    date_deadline = fields.Integer(string='Fecha límite', compute='_compute_date_deadline', inverse='_inverse_date_deadline')
     
     @api.depends('living_area', 'garden_area')
     def _compute_total_area(self):
@@ -65,12 +65,12 @@ class EstateProperty(models.Model):
                 best_price = 0
             record.best_price = best_price
 
-    # @api.depends('validity')
-    # def _compute_date_deadline(self):
-    #     for record in self:
-    #         record.date_deadline = fields.Date.add(fields.Date.today(), days=record.validity)
+    @api.depends('validity')
+    def _compute_date_deadline(self):
+        for record in self:
+            record.date_deadline = fields.Date.add(fields.Date.today(), days=record.validity)
 
-    # def _inverse_date_deadline(self):
-    #     for record in self:
-    #         resp_date = record.date_deadline - fields.Date.today()
-    #         record.validity = resp_date.days
+    def _inverse_date_deadline(self):
+        for record in self:
+            resp_date = record.date_deadline - fields.Date.today()
+            record.validity = resp_date.days
