@@ -17,7 +17,7 @@ class EstatePropertyOffer(models.Model):
     state = fields.Selection(string='Estatus', selection=STATE_OPTS, copy=False)
     partner_id = fields.Many2one(string='Partner', comodel_name='res.partner', required=True)
     property_id = fields.Many2one(string='Propiedad', comodel_name='estate.property', required=True)
-    property_type_id = fields.Char(related='property_id.property_type_id')
+    property_type_id = fields.Many2one(related='property_id.property_type_id')
     validity = fields.Integer(string='Validación', required=True, default=7)
     date_deadline = fields.Date(string='Fecha límite', compute='_compute_date_deadline', inverse='_inverse_date_deadline')
 
