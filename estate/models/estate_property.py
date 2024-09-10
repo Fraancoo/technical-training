@@ -61,7 +61,7 @@ class EstateProperty(models.Model):
                 best_price = 0
             record.best_price = best_price
 
-    @api.depends('garden')
+    @api.onchange('garden')
     def _onchange_garden(self):
         if self.garden:
             self.garden_area = 10
