@@ -1,6 +1,4 @@
 from odoo import models, fields, api
-import logging
-logger = logging.getLogger(__name__)
 
 
 GARDEN_ORIENTATION_OPTS = [
@@ -62,3 +60,13 @@ class EstateProperty(models.Model):
             else:
                 best_price = 0
             record.best_price = best_price
+
+    @api.depends('garden')
+    def _onchange_garden(self):
+        if self.garden:
+            self.garden_area = 10
+            self.garden_orientation = "north"
+        else:
+            self.garden_area = 0
+            self.garden_orientation = ""
+            
