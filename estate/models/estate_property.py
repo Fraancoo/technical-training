@@ -57,10 +57,10 @@ class EstateProperty(models.Model):
     def _constrains_selling_price_check(self):
         for record in self:
             if record.state == 'sold':
-                if not float_is_zero(record.selling_price, precision_digits=1):
+                if float_is_zero(record.selling_price, precision_digits=1):
                     raise ValidationError("El precio de venta es inválido")
                 expected_price_90 = record.expected_price / 100 * 90
-                if not float_compare(record.selling_price, expected_price_90, precision_digits=1):
+                if float_compare(record.selling_price, expected_price_90, precision_digits=1) < 0:
                     raise ValidationError("El precio de venta debe ser al menos el 90%% del precio deseado")
     
     @api.depends('living_area', 'garden_area')
