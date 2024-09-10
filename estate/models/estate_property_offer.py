@@ -49,4 +49,5 @@ class EstatePropertyOffer(models.Model):
             record.state = "accepted"
             record.property_id.partner_id = record.partner_id
             record.property_id.selling_price = record.price
+            record.property_id.state = "sold"
         return True
